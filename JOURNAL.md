@@ -18,7 +18,7 @@ Creator Payout Reconciler shipped, and `pnpm measure:payout-reconciler` turned u
 
 ## 2026-05-30 — Repo public on GitHub + Vercel auto-deploy wired + Analytics/Speed Insights live #milestone
 
-Helm now exists at `github.com/Builder106/Helm` with a one-line description, homepage URL, and 10 topics (gemini, mcp, libsql, llm, ocr, accounts-payable, ai-automation, vision-llm, typescript, react). `vercel git connect` linked the project to the repo; `@vercel/analytics` + `@vercel/speed-insights` wired into front/src/App.tsx and ship +7 KB gzip. The standard-repo baseline checklist from the global CLAUDE.md is now complete except for E2E feature files + demo videos. Each push to `main` triggers an automatic Vercel build; production deployments promote from those builds via the project's Production Branch setting.
+Helm now exists at `github.com/Builder106/helm` with a one-line description, homepage URL, and 10 topics (gemini, mcp, libsql, llm, ocr, accounts-payable, ai-automation, vision-llm, typescript, react). `vercel git connect` linked the project to the repo; `@vercel/analytics` + `@vercel/speed-insights` wired into front/src/App.tsx and ship +7 KB gzip. The standard-repo baseline checklist from the global CLAUDE.md is now complete except for E2E feature files + demo videos. Each push to `main` triggers an automatic Vercel build; production deployments promote from those builds via the project's Production Branch setting.
 
 ## 2026-05-30 — First complete 200-invoice measurement landed #milestone
 

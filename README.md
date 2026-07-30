@@ -6,7 +6,7 @@
   <img alt="Helm — Gemini 3.1 Flash Lite + MCP co-pilot for small-business operations. Four back-office workflows, measured cost and accuracy." src="assets/banner-dark.svg">
 </picture>
 
-[![CI](https://github.com/Builder106/Helm/actions/workflows/deploy.yml/badge.svg)](https://github.com/Builder106/Helm/actions/workflows/deploy.yml)
+[![CI](https://github.com/Builder106/helm/actions/workflows/deploy.yml/badge.svg)](https://github.com/Builder106/helm/actions/workflows/deploy.yml)
 [![Live demo](https://img.shields.io/badge/demo-live-success.svg)](https://helm-bridge.vercel.app)
 [![Node](https://img.shields.io/badge/Node-22%2B-339933.svg?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-19-61DAFB.svg?logo=react&logoColor=white)](https://react.dev/)

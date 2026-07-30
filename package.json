@@ -7,7 +7,7 @@
   "author": "Yinka Vaughan",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Builder106/Helm.git"
+    "url": "https://github.com/Builder106/helm.git"
   },
   "engines": {
     "node": ">=22"
