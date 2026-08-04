@@ -18,7 +18,7 @@ Creators are placed in one of three tiers based on their contract:
 
 The commissionable base is computed per creator across all eligible orders for the period:
 
-```
+```text
 commissionable_base =
     sum(gross_revenue)
   - sum(refunds)

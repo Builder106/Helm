@@ -6,7 +6,7 @@ Orders typically ship within **2 business days** of being placed. Once an order 
 
 - **US (lower 48):** 3–7 business days after shipping.
 - **Alaska / Hawaii:** 7–14 business days after shipping.
-- **Canada:** 5–10 business days after shipping (see [International](#international)).
+- **Canada:** 5–10 business days after shipping (contact us for international rates).
 
 ## Order status without a tracking number
 
