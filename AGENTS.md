@@ -47,7 +47,7 @@ Numbers are placeholders until measured. Do not claim a number you have not run.
 ## Schedule (rough)
 
 | Phase | Output | Done when |
-|---|---|---|
+| --- | --- | --- |
 | Scaffold | Repo skeleton, CLAUDE.md, README skeleton, JOURNAL, CONTRIBUTING, LICENSE, CI stub | This file exists; first commit pushed |
 | Data | Synthetic-invoice + CSV + email-corpus generators with labels | Three generators output reproducible fixtures with seeds |
 | Sub-feature 1 | AP Invoice OCR + measurement | Extraction accuracy printed; cost-per-invoice logged |

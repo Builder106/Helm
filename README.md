@@ -102,7 +102,7 @@ sequenceDiagram
 Each panel of the dashboard maps to one sub-feature, and each sub-feature ships with a measurement. The full contract — workflow, schema, and exact measurement protocol — lives in [`docs/scope.md`](docs/scope.md).
 
 | Sub-feature | Stack | Measurement |
-|---|---|---|
+| --- | --- | --- |
 | **AP Invoice OCR** | Gemini 3.1 Flash Lite vision, Zod, libsql | Line-item accuracy on 200-invoice holdout, USD/invoice, p50/p95 latency |
 | **Creator Payout Reconciler** | Gemini + a programmatic re-computer | Exact-match rate vs. hand-computed ground truth on 50-creator fixture |
 | **Tier-1 CS Responder** | libsql vector retrieval, Gemini structured output, confidence gating | Auto-response rate, precision; escalation recall |
@@ -172,7 +172,7 @@ The mp4 master ([`docs/demos/helm-tour.mp4`](docs/demos/helm-tour.mp4)) is what'
 ## Project status
 
 | Phase | Status |
-|---|---|
+| --- | --- |
 | Scaffold | ✅ |
 | Synthetic-data generators (seed=1 committed) | ✅ |
 | Sub-feature 1 — AP Invoice OCR | ✅ 200 invoices · 99.0% parse · 91.9% field accuracy · $0.000298/invoice |
