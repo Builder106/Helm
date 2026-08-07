@@ -45,3 +45,6 @@ updates:
     labels:
       - dependencies
       - ci
+    ignore:
+      - dependency-name: "typescript"
+        versions: [">= 7.0.0"]
