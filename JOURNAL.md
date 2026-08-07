@@ -4,6 +4,10 @@
 > things happen — retrospectives need this raw material to land.
 > Reverse-chronological; one paragraph max per entry.
 
+## 2026-08-07 — Sub-feature 3 & 4 modules built + HTMX migration plan defined #milestone
+
+Implemented Tier-1 CS Responder (`back/src/cs/responder.ts`) using libSQL vector distance and confidence gating, and Cross-Company KPI Q&A Agent (`back/src/kpi/agent.ts`) orchestrating 4 custom MCP servers with grounded citations. Updated status table in README and documented HTMX hypermedia migration strategy.
+
 ## 2026-06-13 — E2E hardening: data-driven assertions, self-starting server, CI gate #incident #decision
 
 A test audit surfaced three things. (1) Both `dashboard.spec.ts` and the demo tour hardcoded `99.0%` / `6.0%` — measurement values that silently rot when the corpus is re-run; replaced them with `e2e/helpers/report-data.ts`, which reads the same committed `report.json` the front bundles and formats it with the same `formatPercent` rule, so assertions track the data. (2) Neither config had a `webServer`, so `pnpm test:e2e` quietly assumed a server was already up (masked by `--pass-with-no-tests`); added one — and hit a gotcha: Playwright runs `webServer.command` with cwd = the config's dir (`e2e/`), where the `pnpm --filter ./front` workspace filter resolves to nothing and the process "exited early," so the cwd is pinned to the repo root via `path.resolve(__dirname, '..')`. (3) A recorded demo run had failed with "Tearing down context exceeded the test timeout of 300000ms" — the body finished but 2560×1600 video finalization ran out the clock; raised the demo timeout to 600s and swapped `networkidle` (which never settles behind Vite's HMR socket) for `domcontentloaded` + an explicit brand-visible wait. Added an `E2E (Playwright QA)` step to `deploy.yml` (Chromium is already installed for PNG rendering). QA suite: 6/6 green against the auto-started front.

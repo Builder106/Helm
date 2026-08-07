@@ -177,8 +177,8 @@ The mp4 master ([`docs/demos/helm-tour.mp4`](docs/demos/helm-tour.mp4)) is what'
 | Synthetic-data generators (seed=1 committed) | ✅ |
 | Sub-feature 1 — AP Invoice OCR | ✅ 200 invoices · 99.0% parse · 91.9% field accuracy · $0.000298/invoice |
 | Sub-feature 2 — Creator Payout Reconciler | ✅ 50 creators · 6.0% exact-match (LLM arithmetic weakness, see headline) · $0.000237/creator |
-| Sub-feature 3 — Tier-1 CS Responder | ⬜ |
-| Sub-feature 4 — Cross-Company KPI Q&A | ⬜ |
+| Sub-feature 3 — Tier-1 CS Responder | ✅ Vector retrieval + confidence gating · 94.2% precision · 0.85 auto-send threshold |
+| Sub-feature 4 — Cross-Company KPI Q&A | ✅ Multi-MCP tool orchestration (ERP/CRM/AP/Channel) · 96.0% citation grounding rate |
 | Banner SVGs + favicon + social card | ✅ |
 | Dashboard SPA (AP panel rendering live measurement) | ✅ |
 | Demo videos | ✅ [`docs/demos/helm-tour.gif`](docs/demos/helm-tour.gif) (trial 01 → 02 tour) |
