@@ -6,5 +6,12 @@
   "outputDirectory": "back/public",
   "github": {
     "silent": true
+  },
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "staging": true,
+      "*": false
+    }
   }
 }
