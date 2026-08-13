@@ -4,7 +4,7 @@ We accept Visa, Mastercard, American Express, Discover, Apple Pay, Google Pay, a
 
 ## When your card is charged
 
-Your card is **authorized** when you place the order and **charged** when the order ships. If you see two transactions on your statement during the gap, only the charge (not the authorization) reflects an actual debit.
+Your card is **authorized**when you place the order and**charged** when the order ships. If you see two transactions on your statement during the gap, only the charge (not the authorization) reflects an actual debit.
 
 ## Duplicate charges
 

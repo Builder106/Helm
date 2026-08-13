@@ -8,9 +8,13 @@ Demo Video Recording" section — that document is binding.
 ## Layout
 
 - `features/` — **QA suite.** Fast, headless, no videos. Assertion-bearing
+
   scenarios that grow alongside the dashboard.
+
 - `demo/features/` — **Demo suite.** Single-worker, slow-motion, full
+
   video on every scenario. Produces the README walkthroughs.
+
 - `steps/` — shared step definitions. Reused across both suites.
 
 ## Status
@@ -27,4 +31,4 @@ pnpm test:e2e          # QA suite, headless
 pnpm test:demo         # demo recording suite
 ```
 
-Both default to `HELM_BASE_URL=http://localhost:5173` (Vite dev server).
+Both default to `HELM_BASE_URL=<http://localhost:5173`> (Vite dev server).

@@ -43,4 +43,4 @@ At 6 minutes/invoice manual handling × $25/hr loaded wage, this batch would cos
 
 ---
 
-_Reproduced by_ `pnpm measure:invoice-ocr --seed 1 --extractor gemini`. _The full per-invoice trace is in_ `report.json`.
+_Reproduced by_`pnpm measure:invoice-ocr --seed 1 --extractor gemini`._The full per-invoice trace is in_ `report.json`.

@@ -4,7 +4,7 @@ This is the policy the Helm reconciler applies to monthly creator orders. The pl
 
 ## Eligibility
 
-Only orders with status `fulfilled` count toward the monthly payout. Orders that are `cancelled` or `pending` are excluded entirely — they do not contribute to gross revenue, refunds, shipping, fees, or promo credits.
+Only orders with status `fulfilled`count toward the monthly payout. Orders that are`cancelled`or`pending` are excluded entirely — they do not contribute to gross revenue, refunds, shipping, fees, or promo credits.
 
 ## Commission tiers
 
@@ -21,10 +21,12 @@ The commissionable base is computed per creator across all eligible orders for t
 ```text
 commissionable_base =
     sum(gross_revenue)
+
   - sum(refunds)
   - sum(shipping_cost)
   - sum(platform_fee)
   - promo_credit_deduction
+
 ```
 
 The `promo_credit_deduction` depends on tier:
@@ -36,7 +38,7 @@ If the commissionable base would be negative, it is clamped to zero.
 
 ## Gross commission and net payout
 
-`gross_commission = commissionable_base × commission_rate`. `net_payout_native` equals `gross_commission` (no further deductions apply in the current policy).
+`gross_commission = commissionable_base × commission_rate`. `net_payout_native`equals`gross_commission` (no further deductions apply in the current policy).
 
 ## Currency conversion
 

@@ -30,4 +30,4 @@ Hand-reconciling each creator's payout from CSV + policy takes ~3 min at $25/hr;
 
 ---
 
-_Reproduced by_ `pnpm measure:payout-reconciler --seed 1 --extractor gemini`. _Per-creator trace is in_ `report.json`.
+_Reproduced by_`pnpm measure:payout-reconciler --seed 1 --extractor gemini`._Per-creator trace is in_ `report.json`.

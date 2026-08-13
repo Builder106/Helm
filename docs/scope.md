@@ -12,11 +12,11 @@ A Gemini 3.1 Flash Lite + MCP executive co-pilot that runs four real back-office
 
 **Input.** A directory of invoice PNGs (rendered from synthetic HTML via Playwright) from heterogeneous vendors with varied layouts.
 
-**Output.** A normalized `invoices.jsonl` with one record per invoice: vendor, invoice number, line items (description, qty, unit price, total), subtotal, tax, total, due date. Plus an `anomalies.jsonl` for invoices where the line-item math doesn't reconcile or a field is missing.
+**Output.** A normalized `invoices.jsonl`with one record per invoice: vendor, invoice number, line items (description, qty, unit price, total), subtotal, tax, total, due date. Plus an`anomalies.jsonl` for invoices where the line-item math doesn't reconcile or a field is missing.
 
 **Workflow.**
 
-1. Watch a folder; for each new PNG, send it to Gemini 3.1 Flash Lite vision via the `@google/genai` SDK with a structured-extraction prompt (`responseMimeType: 'application/json'` + a `responseSchema` matching the Zod shape).
+1. Watch a folder; for each new PNG, send it to Gemini 3.1 Flash Lite vision via the `@google/genai` SDK with a structured-extraction prompt (`responseMimeType: 'application/json'`+ a`responseSchema` matching the Zod shape).
 2. Validate the extracted JSON against a Zod schema.
 3. Compute reconciliation: `sum(line_items) + tax ?= total`. Flag mismatches.
 4. Push valid invoices to a Postgres `ap_invoices` table; emit anomalies to a review queue.
@@ -31,7 +31,7 @@ A Gemini 3.1 Flash Lite + MCP executive co-pilot that runs four real back-office
 
 **Input.** A CSV of creator orders in a TikTok-Shop-like schema (`creator_id`, `order_id`, `gross_revenue`, `refunds`, `shipping_cost`, `platform_fee`, `promo_credit`, `currency`, `paid_out`). Plus a `policy.md` written in natural language describing commission tiers, refund rules, and minimum-payout thresholds.
 
-**Output.** A `payouts.csv` with one row per creator: gross, deductions itemized by rule, net payout, currency-normalized USD net. Plus a `discrepancies.md` markdown report flagging cases where the policy is ambiguous.
+**Output.** A `payouts.csv`with one row per creator: gross, deductions itemized by rule, net payout, currency-normalized USD net. Plus a`discrepancies.md` markdown report flagging cases where the policy is ambiguous.
 
 **Workflow.**
 
@@ -48,11 +48,11 @@ A Gemini 3.1 Flash Lite + MCP executive co-pilot that runs four real back-office
 
 **Input.** Inbound customer messages (synthetic email + chat corpus, ~300 labeled with intent + canonical answer).
 
-**Output.** Per message: an intent classification, a drafted reply grounded in a small knowledge-base markdown corpus, a confidence score in `[0,1]`, and an action: `auto_send` (≥ 0.85), `human_review` (0.5–0.85), or `escalate` (< 0.5).
+**Output.** Per message: an intent classification, a drafted reply grounded in a small knowledge-base markdown corpus, a confidence score in `[0,1]`, and an action: `auto_send`(≥ 0.85),`human_review`(0.5–0.85), or`escalate` (< 0.5).
 
 **Workflow.**
 
-1. Embed the knowledge-base markdown once into libsql (the F32_BLOB vector column on a `kb_passages` table; cosine similarity via `vector_distance_cos`).
+1. Embed the knowledge-base markdown once into libsql (the F32_BLOB vector column on a `kb_passages`table; cosine similarity via`vector_distance_cos`).
 2. For each inbound message, retrieve top-k passages; pass message + passages to Gemini with a structured-output prompt.
 3. Confidence threshold gates the action.
 
@@ -64,7 +64,7 @@ A Gemini 3.1 Flash Lite + MCP executive co-pilot that runs four real back-office
 
 ### 4. Cross-Company KPI Q&A
 
-**Input.** A natural-language question from the dashboard's chat box. Example: *"Which vendor's AP invoices grew fastest in Q3?"* or *"Which creator has the highest unreconciled balance?"*
+**Input.** A natural-language question from the dashboard's chat box. Example: *"Which vendor's AP invoices grew fastest in Q3?"*or*"Which creator has the highest unreconciled balance?"*
 
 **Output.** A grounded answer with citations to specific rows in the four MCP-served data sources.
 
