@@ -3,7 +3,7 @@
   <source media="(prefers-color-scheme: light)" srcset="assets/banner-light.svg" type="image/svg+xml">
   <source media="(prefers-color-scheme: dark)"  srcset="assets/banner-dark.png">
   <source media="(prefers-color-scheme: light)" srcset="assets/banner-light.png">
-  <img alt="Helm — Gemini 3.1 Flash Lite + MCP co-pilot for small-business operations. Four back-office workflows, measured cost and accuracy." src="assets/banner-dark.svg">
+  <img alt="Helm: Gemini 3.1 Flash Lite and MCP co-pilot for small business operations" src="assets/banner-dark.svg">
 </picture>
 
 [![CI](https://github.com/Builder106/helm/actions/workflows/deploy.yml/badge.svg)](https://github.com/Builder106/helm/actions/workflows/deploy.yml)
@@ -15,13 +15,19 @@
 [![libsql](https://img.shields.io/badge/libsql-SQLite%20%2B%20vector-4FF8D2.svg)](https://github.com/tursodatabase/libsql)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](#license)
 
-> **Helm is a Gemini 3.1 Flash Lite + MCP executive co-pilot for small-and-mid-market business operations.** Four back-office workflows — AP-invoice OCR, creator-payout reconciliation, Tier-1 customer-service responses, and cross-company KPI Q&A — running end-to-end with measured cost and accuracy per task. The dashboard is the demo.
+> **An AI co-pilot for small business operations.** Automates invoice processing, payout calculations, and repetitive back-office tasks.
 
-**Live dashboard:** [helm-bridge.vercel.app](https://helm-bridge.vercel.app) — rendering the seed=1 / 200-invoice measurement against Gemini 3.1 Flash Lite.
+## 💡 What is Helm?
 
-## The headline findings
+Small business employees often spend hours manually reading invoices, checking vendor payouts, and answering repetitive questions. Helm acts as an AI operations assistant that reads invoices with computer vision, flags billing mistakes, and performs routine financial checks at a fraction of a cent per document.
 
-### Trial 01 — AP Invoice OCR · 200 synthetic invoices · Gemini 3.1 Flash Lite vision
+Helm orchestrates four back-office workflows (accounts-payable invoice OCR, creator payout reconciliation, Tier-1 customer service responses, and cross-company KPI Q&A) with measured cost and accuracy per task.
+
+**Live dashboard:** [helm-bridge.vercel.app](https://helm-bridge.vercel.app) (rendering the 200-invoice measurement against Gemini 3.1 Flash Lite).
+
+## 📊 The Headline Findings
+
+### Trial 01: AP Invoice OCR (200 synthetic invoices, Gemini 3.1 Flash Lite vision)
 
 > **99.0% parse rate, 91.9% field accuracy, 84.1% line-item exact match at $0.000298 per invoice.**Reconciler F1 0.78 on anomaly detection (precision 0.67, recall 0.93). At a 6 min/invoice manual baseline and $25/hr loaded wage, the pipeline recovers**~18.7 labor-hours per 200 invoices — a 15.4× time reduction at $0.06 total API cost.** Reproduced by [`pnpm measure:invoice-ocr --seed 1 --extractor gemini`](data/measurements/invoice-ocr.ts).
 

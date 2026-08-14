@@ -4,6 +4,10 @@
 > things happen — retrospectives need this raw material to land.
 > Reverse-chronological; one paragraph max per entry.
 
+## 2026-08-14: Accessible plain-English documentation update #decision
+
+Updated the README headline, summary tagline, and introductory section to explain the Gemini and MCP operations assistant in plain terms. Framed the value proposition around eliminating repetitive clerical paperwork and automated invoice reconciliation while keeping benchmark numbers and technical architecture diagrams intact.
+
 ## 2026-08-07 — Sub-feature 3 & 4 modules built + HTMX migration plan defined #milestone
 
 Implemented Tier-1 CS Responder (`back/src/cs/responder.ts`) using libSQL vector distance and confidence gating, and Cross-Company KPI Q&A Agent (`back/src/kpi/agent.ts`) orchestrating 4 custom MCP servers with grounded citations. Updated status table in README and documented HTMX hypermedia migration strategy.
