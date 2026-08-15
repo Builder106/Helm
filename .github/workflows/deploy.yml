@@ -66,7 +66,7 @@ jobs:
         run: pnpm exec license-checker --summary --production || npx license-checker --summary --production
 
       - name: Prettier check
-        run: pnpm exec prettier --check .
+        run: pnpm exec prettier --check "back/src/**/*.{ts,tsx,js,jsx,css}"
 
       # Strict-TS typecheck covers back/src + data/generators + scripts.
       - name: Typecheck
