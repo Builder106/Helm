@@ -62,9 +62,19 @@ jobs:
       - name: Node dependency audit
         run: pnpm audit --audit-level high
 
+      - name: Open-source license compliance scan
+        run: pnpm exec license-checker --summary --production || npx license-checker --summary --production
+
+      - name: Prettier check
+        run: pnpm exec prettier --check .
+
       # Strict-TS typecheck covers back/src + data/generators + scripts.
       - name: Typecheck
         run: pnpm typecheck:data
+
+      # Build workspace packages
+      - name: Build
+        run: pnpm build
 
       # Vitest: deterministic-RNG, payout-policy, OCR-reconciler suites.
       - name: Unit tests
