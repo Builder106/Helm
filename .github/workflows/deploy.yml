@@ -65,8 +65,8 @@ jobs:
       - name: Open-source license compliance scan
         run: pnpm exec license-checker --summary --production || npx license-checker --summary --production
 
-      - name: Prettier check
-        run: pnpm exec prettier --check "back/src/**/*.{ts,tsx,js,jsx,css}"
+      - name: Workspace lint
+        run: pnpm lint
 
       # Strict-TS typecheck covers back/src + data/generators + scripts.
       - name: Typecheck
