@@ -57,27 +57,18 @@ Render to PNG with:
   <g font-size="11" font-weight="700" letter-spacing="0.18em">
     <text x="292" y="296" fill="#4FF8D2">SUB-FEATURES</text>
     <text x="292" y="324" fill="#FFFFFF" font-size="15" font-weight="600" letter-spacing="0">
-      AP-invoice OCR · Payout reconciler · Tier-1 support · KPI Q&amp;A
+      AP-invoice OCR | Payout reconciler | Tier-1 support | KPI Q&amp;A
     </text>
 
     <text x="292" y="362" fill="#4FF8D2">STACK</text>
     <text x="292" y="390" fill="#FFFFFF" font-size="15" font-weight="500" letter-spacing="0">
       <tspan>Llama 4 Scout (Groq)</tspan>
-      <tspan dx="14" fill="#6B7280">·</tspan>
+      <tspan dx="14" fill="#6B7280">|</tspan>
       <tspan dx="14">MCP</tspan>
-      <tspan dx="14" fill="#6B7280">·</tspan>
+      <tspan dx="14" fill="#6B7280">|</tspan>
       <tspan dx="14">libsql</tspan>
-      <tspan dx="14" fill="#6B7280">·</tspan>
+      <tspan dx="14" fill="#6B7280">|</tspan>
       <tspan dx="14">Node + React + Chart.js</tspan>
-    </text>
-  </g>
-
-  <!-- Right-side credibility chip -->
-  <g transform="translate(1040, 70)">
-    <rect x="0" y="0" width="100" height="28" rx="14" fill="none" stroke="#4FF8D2" stroke-width="1.5"/>
-    <circle cx="14" cy="14" r="4" fill="#4FF8D2"/>
-    <text x="26" y="19" fill="#4FF8D2" font-size="12" font-weight="700" letter-spacing="0.12em">
-      MEASURED
     </text>
   </g>
 </svg>
