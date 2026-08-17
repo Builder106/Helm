@@ -19,6 +19,7 @@ In the new architecture:
 
 - Identify all current JSON endpoints in `/back`.
 - Create parallel endpoints that return HTML fragments. For example, instead of returning `[{ "id": 1, "task": "OCR" }]`, return `<tr><td>1</td><td>OCR</td></tr>`.
+
 1. **Data Fetching:** Shift all data fetching logic (currently in `useEffect` or React Query/SWR) to the backend route handlers.
 
 ## 3. Phase 2: Frontend Replacement
@@ -29,6 +30,7 @@ In the new architecture:
 
 - Convert JSX components into server-side templates.
 - Replace React `onClick`and`onSubmit`handlers with`hx-post`and`hx-target`.
+
 1. **Charts Migration:** Helm currently uses `react-chartjs-2`. This will be replaced with vanilla `Chart.js`, initialized via an Alpine.js component or a simple script tag that re-evaluates when HTMX swaps in the canvas element.
 
 ## 4. Phase 3: Consolidation
