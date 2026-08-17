@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@google/genai':
-        specifier: ^2.16.0
-        version: 2.16.0(supports-color@10.2.2)
+        specifier: ^2.17.1
+        version: 2.17.1(supports-color@10.2.2)
       '@libsql/client':
         specifier: ^0.17.4
         version: 0.17.4
@@ -335,8 +335,8 @@ packages:
   '@fastify/view@12.0.0':
     resolution: {integrity: sha512-Prcoim4yTwG6vPnIyGrWViDx6FFnchV0GQWeBgAgywlL1JflGhTLDhIsyd7EkOreYHyqALqxnmhhJhD4NrJTWw==}
 
-  '@google/genai@2.16.0':
-    resolution: {integrity: sha512-K+1C1sqR0u7NJ5xpKJCQBws0QXpfuklo3WTNuUIMvtbQfNW2O5OohX0BYT2V+PXzsUzQEwGCXPWQxttLyGQ6xw==}
+  '@google/genai@2.17.1':
+    resolution: {integrity: sha512-CdZ3M/titoH81hXXkvOikrOW26bC9IXh9iYT7u+r+5p7wi1LnMEnB0AbJfDeWAkjuneP4oJ299BtCt6twmORWg==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       '@modelcontextprotocol/sdk': ^1.25.2
@@ -2144,7 +2144,7 @@ snapshots:
       fastify-plugin: 5.1.0
       toad-cache: 3.7.4
 
-  '@google/genai@2.16.0(supports-color@10.2.2)':
+  '@google/genai@2.17.1(supports-color@10.2.2)':
     dependencies:
       google-auth-library: 10.9.1(supports-color@10.2.2)
       p-retry: 4.6.2
