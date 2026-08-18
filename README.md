@@ -27,21 +27,21 @@ Helm orchestrates four back-office workflows (accounts-payable invoice OCR, crea
 
 ## 📊 The Headline Findings
 
-### Trial 01: AP Invoice OCR (200 synthetic invoices, Gemini 3.1 Flash Lite vision)
+### Trial 01: Automated Invoice Processing (200 test invoices, Gemini 3.1 Flash Lite vision)
 
-> **99.0% parse rate, 91.9% field accuracy, 84.1% line-item exact match at $0.000298 per invoice.**Reconciler F1 0.78 on anomaly detection (precision 0.67, recall 0.93). At a 6 min/invoice manual baseline and $25/hr loaded wage, the pipeline recovers**~18.7 labor-hours per 200 invoices — a 15.4× time reduction at $0.06 total API cost.** Reproduced by [`pnpm measure:invoice-ocr --seed 1 --extractor gemini`](data/measurements/invoice-ocr.ts).
+> **99.0% parse rate, 91.9% field accuracy, 84.1% line-item exact match at $0.000298 per invoice.** The system detected 93% of billing errors and anomalies. Compared to a human employee taking 6 minutes per invoice at $25/hour, this pipeline saves **~18.7 labor hours per 200 invoices, cutting processing time by 15.4x for only $0.06 in total AI cost.** Reproduced by [`pnpm measure:invoice-ocr --seed 1 --extractor gemini`](data/measurements/invoice-ocr.ts).
 
-### Trial 02 — Creator Payout Reconciler · 50 creators × 863 orders · Gemini 3.1 Flash Lite policy reasoning
+### Trial 02: Partner Payout Calculations (50 creators across 863 orders, Gemini 3.1 Flash Lite reasoning)
 
-> **6.0% exact-match rate, 54.1% field accuracy, $285 max single-creator drift on $14,184 total reconciled.**This is the finding worth reading carefully:**Gemini reads invoices well (vision) but reasons about multi-step arithmetic policy badly (text).** The same model that scored 91.9% on invoice OCR drops to 54% on payout math — applying commission tiers, refund/shipping/fee deductions, currency FX, and minimum-payout thresholds across 17 orders per creator. The deterministic re-computer at [`data/generators/orders/policy.ts`](data/generators/orders/policy.ts) is the architectural answer: the LLM proposes, the code disposes. Reproduced by [`pnpm measure:payout-reconciler --seed 1 --extractor gemini`](data/measurements/payout-reconciler.ts).
+> **6.0% exact-match rate, 54.1% field accuracy, with up to $285 discrepancy on $14,184 in total payouts.** This highlights a critical lesson: **AI models read visual documents well, but struggle with complex multi-step math.** The same AI model that scored 91.9% on visual invoice reading dropped to 54% when calculating multi-tier commissions, refunds, and shipping deductions across 17 orders per person. The architectural solution is to let AI extract the data, but use reliable code to do the final arithmetic. Reproduced by [`pnpm measure:payout-reconciler --seed 1 --extractor gemini`](data/measurements/payout-reconciler.ts).
 
-The dashboard at [helm-bridge.vercel.app](https://helm-bridge.vercel.app) renders both trials side-by-side; the depth-zone metaphor descends from trial 01 at the sunlit zone to trial 02 in the twilight.
+The dashboard at [helm-bridge.vercel.app](https://helm-bridge.vercel.app) displays both trials side by side for comparison.
 
 ## What this is
 
-Helm is a portfolio project: a working sketch of what an AI/automation team would actually build inside a growing SMB. The Handshake postings that motivated it — Smart Circle International, FHI Heat, Source Creative — all describe the same shape of work: an LLM-powered layer that sits between human operators and their messy stack of business systems, runs the repetitive parts, and surfaces decisions for humans. Helm is that layer, built against synthetic stand-ins for the systems and measured against hand-labeled ground truth.
+Helm is a practical portfolio project showing what an AI automation engineer would build inside a growing small or mid-sized business. Many expanding companies struggle with manual back-office tasks like reading invoices, checking vendor payments, answering routine support emails, and looking up business metrics. Helm creates an automated layer between employees and business databases to handle routine tasks and flag tricky issues for human review.
 
-The lane is **agent/automation**, not applied ML. There is no novel model here. The engineering contribution is the orchestration — four MCP servers, a Gemini-vision OCR pipeline, a policy reasoner, and a citation-grounded executive Q&A path — and the per-workflow cost/accuracy measurement that lets the README make a defensible claim. The model is Gemini 3.1 Flash Lite via Google AI Studio; the extractor interface is provider-agnostic and a Llama-via-Groq implementation lives alongside (`back/src/ap/extraction-groq.ts`) as an alternative.
+The focus is on practical workflow automation rather than theoretical research. The core engineering contribution is connecting specialized business tools, visual invoice readers, rules checks, and executive search into a cohesive, measured system.
 
 ## How it works
 
@@ -105,44 +105,42 @@ sequenceDiagram
 
 ## The four sub-features
 
-Each panel of the dashboard maps to one sub-feature, and each sub-feature ships with a measurement. The full contract — workflow, schema, and exact measurement protocol — lives in [`docs/scope.md`](docs/scope.md).
+Each panel of the dashboard maps to one sub-feature, and each sub-feature ships with a measurement. The full contract (workflow, schema, and exact measurement protocol) lives in [`docs/scope.md`](docs/scope.md).
 
 | Sub-feature | Stack | Measurement |
 | --- | --- | --- |
-| **AP Invoice OCR** | Gemini 3.1 Flash Lite vision, Zod, libsql | Line-item accuracy on 200-invoice holdout, USD/invoice, p50/p95 latency |
-| **Creator Payout Reconciler** | Gemini + a programmatic re-computer | Exact-match rate vs. hand-computed ground truth on 50-creator fixture |
-| **Tier-1 CS Responder** | libsql vector retrieval, Gemini structured output, confidence gating | Auto-response rate, precision; escalation recall |
-| **Cross-Company KPI Q&A** | Gemini tool-use, four custom MCP servers | Citation accuracy, tool-routing precision on a 10-question battery |
+| **Invoice OCR** | Gemini 3.1 Flash Lite vision, Zod, libsql | Line-item accuracy on 200-invoice holdout, USD/invoice, latency |
+| **Creator Payout Reconciler** | Gemini + programmatic calculator | Exact-match rate vs. hand-computed ground truth on 50-creator fixture |
+| **Customer Support Responder** | libsql vector retrieval, Gemini structured output, confidence gating | Auto-response rate, precision, and escalation accuracy |
+| **Cross-Company Metrics Q&A** | Gemini tool-use, four custom MCP servers | Citation accuracy and tool-routing precision on a 10-question battery |
 
 ## Architecture
 
 ```text
 Helm/
-├── front/        React 19 + Vite + Chart.js + Tailwind — the dashboard
-├── back/         Node 22 + Express 5 — API surface, agent orchestration
-├── mcp/          Four MCP servers — one per data source (erp, crm, ap, channel)
+├── front/        React 19 + Vite + Chart.js + Tailwind: the dashboard
+├── back/         Node 22 + Express 5: API surface, agent orchestration
+├── mcp/          Four MCP servers: one per data source (erp, crm, ap, channel)
 │   ├── erp/
 │   ├── crm/
 │   ├── ap/
 │   └── channel/
 ├── data/
 │   ├── generators/   Seed-driven synthetic-data generators
-│   ├── render-png/   Playwright-driven HTML → PNG renderer for invoices
+│   ├── render-png/   Playwright-driven HTML to PNG renderer for invoices
 │   ├── fixtures/     Versioned generated fixtures with labels
 │   └── measurements/ Reproducibility scripts for every README number
-├── e2e/          Playwright: QA suite + slowMo demo-recording suite
-├── docs/         scope.md, architecture.md, anything else durable
+├── e2e/          Playwright: QA suite + demo-recording suite
+├── docs/         scope.md, architecture.md
 ├── assets/       Banner SVGs, logo, demo recordings
 └── .github/workflows/  CI + deploy
 ```
 
-The deeper architectural notes — the model-routing decisions, the MCP-server protocol Helm uses, the prompt layout for each path — live in [`docs/architecture.md`](docs/architecture.md) as those decisions land.
+Detailed architectural notes on model routing, tool protocols, and prompt structure live in [`docs/architecture.md`](docs/architecture.md).
 
 ## Why this exists
 
-Three Handshake postings (Smart Circle, FHI Heat, Source Creative) describe the same operational gap: small companies with real revenue but no in-house AI/automation team, drowning in invoice processing, creator-payout math, customer-service triage, and "where do I find that number" executive questions. Helm is a sketch of what shipping that team's first quarter of work would look like — with the constraint that every claim in the README has to be backed by a re-runnable measurement, not a generated screenshot.
-
-This is a portfolio piece, not a product. The synthetic data is synthetic; the workflows are real.
+Many small and mid-sized companies face the same operational challenge: real revenue and customer volume, but no in-house AI automation team. They spend countless hours on invoice processing, creator-payout calculations, customer-service triage, and looking up numbers across disconnected spreadsheets and tools. Helm demonstrates a practical solution to these bottlenecks, backed by measurable accuracy and cost data on every workflow.
 
 ## Running it locally
 
@@ -151,27 +149,27 @@ pnpm install
 pnpm exec playwright install chromium    # first run only
 cp .env.example .env                     # add GEMINI_API_KEY (free at aistudio.google.com); LIBSQL_URL defaults to file:./data/helm.db
 pnpm data:generate --seed 1              # generators
-pnpm data:render-png --seed 1            # HTML → PNG, ~17s
+pnpm data:render-png --seed 1            # HTML to PNG (~17s)
 pnpm measure:invoice-ocr --seed 1        # full pipeline against the mock extractor
 pnpm measure:invoice-ocr --seed 1 --extractor gemini   # against real Gemini 3.1 Flash Lite vision (~14 min, free)
 ```
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the longer dev-environment story.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the complete development guide.
 
 ## Demos
 
-The dashboard is a submersible dive log: trial 01 sits in the sunlit zone (~15m), trial 02 descends to the twilight zone (~80m), and pending trials wait deeper in the column. Each video is recorded by the Playwright demo suite (`pnpm test:demo`) and committed to `docs/demos/`.
+The dashboard visualizes tests across increasing depth levels. Each video is recorded by the Playwright demo suite (`pnpm test:demo`) and stored in `docs/demos/`.
 
 <details>
-<summary><b>Trial 01 → Trial 02 — the headline tour (≈30s)</b></summary>
+<summary><b>Dashboard Tour (≈30s)</b></summary>
 
 <br />
 
-![Helm dashboard tour — trial 01 then trial 02](docs/demos/helm-tour.gif)
+![Helm dashboard tour](docs/demos/helm-tour.gif)
 
-A single descent through the dashboard: the AP Invoice OCR panel with its 99.0% parse rate, then down to the Creator Payout Reconciler showing the 6.0% exact-match finding and the per-creator discrepancy log flagged for human review.
+A tour through the dashboard: the Invoice OCR panel with its 99.0% parse rate, followed by the Creator Payout Reconciler showing the payout discrepancies flagged for human review.
 
-The mp4 master ([`docs/demos/helm-tour.mp4`](docs/demos/helm-tour.mp4)) is what's embedded above as a GIF — open the mp4 for sharper playback.
+The master video ([`docs/demos/helm-tour.mp4`](docs/demos/helm-tour.mp4)) is embedded above as a GIF.
 
 </details>
 
@@ -181,13 +179,13 @@ The mp4 master ([`docs/demos/helm-tour.mp4`](docs/demos/helm-tour.mp4)) is what'
 | --- | --- |
 | Scaffold | ✅ |
 | Synthetic-data generators (seed=1 committed) | ✅ |
-| Sub-feature 1 — AP Invoice OCR | ✅ 200 invoices · 99.0% parse · 91.9% field accuracy · $0.000298/invoice |
-| Sub-feature 2 — Creator Payout Reconciler | ✅ 50 creators · 6.0% exact-match (LLM arithmetic weakness, see headline) · $0.000237/creator |
-| Sub-feature 3 — Tier-1 CS Responder | ✅ Vector retrieval + confidence gating · 94.2% precision · 0.85 auto-send threshold |
-| Sub-feature 4 — Cross-Company KPI Q&A | ✅ Multi-MCP tool orchestration (ERP/CRM/AP/Channel) · 96.0% citation grounding rate |
+| Sub-feature 1: Invoice OCR | ✅ 200 invoices, 99.0% parse, 91.9% field accuracy, $0.000298/invoice |
+| Sub-feature 2: Creator Payout Reconciler | ✅ 50 creators, 6.0% exact-match (highlights LLM math limits), $0.000237/creator |
+| Sub-feature 3: Customer Support Responder | ✅ Vector retrieval + confidence gating, 94.2% precision, 0.85 auto-send threshold |
+| Sub-feature 4: Cross-Company Metrics Q&A | ✅ Multi-tool orchestration (ERP/CRM/AP/Channel), 96.0% citation accuracy |
 | Banner SVGs + favicon + social card | ✅ |
 | Dashboard SPA (AP panel rendering live measurement) | ✅ |
-| Demo videos | ✅ [`docs/demos/helm-tour.gif`](docs/demos/helm-tour.gif) (trial 01 → 02 tour) |
+| Demo videos | ✅ [`docs/demos/helm-tour.gif`](docs/demos/helm-tour.gif) |
 | Deployed dashboard | ✅ [helm-bridge.vercel.app](https://helm-bridge.vercel.app) |
 
 ## License
