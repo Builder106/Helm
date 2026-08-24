@@ -19,7 +19,7 @@
     "@tailwindcss/cli": "^4.3.3",
     "@types/node": "^26.1.1",
     "autoprefixer": "^10.5.4",
-    "concurrently": "^10.0.3",
+    "concurrently": "^10.0.5",
     "postcss": "^8.5.26",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.10",
