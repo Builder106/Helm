@@ -26,6 +26,9 @@ concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
+permissions:
+  contents: read
+
 jobs:
   secrets:
     name: Secret scan
@@ -66,7 +69,7 @@ jobs:
         run: pnpm exec license-checker --summary --production || npx license-checker --summary --production
 
       - name: Workspace lint
-        run: pnpm --filter "./back" lint || true
+        run: pnpm --filter "./back" lint
 
       # Strict-TS typecheck covers back/src + data/generators + scripts.
       - name: Typecheck
@@ -92,12 +95,39 @@ jobs:
       - name: Install Chromium for PNG render
         run: pnpm exec playwright install --with-deps chromium
 
-      # E2E QA suite (Playwright). MUST run before the mock-OCR smoke below:
-      # that step overwrites data/measurements/output with --extractor=mock,
-      # but the E2E asserts the dashboard against the committed *gemini*
-      # report.json (e.g. "measured · gemini 3.1 flash lite"). Running it first
-      # keeps that data intact. Self-starts the Vite dev server via webServer.
-      - name: E2E (Playwright QA)
+      - name: Render seed=1 PNGs
+        run: pnpm data:render-png --seed 1
+
+      - name: Mock OCR pipeline smoke (limit 10)
+        run: pnpm measure:invoice-ocr --seed 1 --limit 10
+
+  e2e:
+    name: E2E (Playwright QA)
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6.0.10
+
+      - name: Set up Node 26
+        uses: actions/setup-node@v7
+        with:
+          node-version: 26
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Chromium for Playwright
+        run: pnpm exec playwright install --with-deps chromium
+
+      # E2E asserts the dashboard against the committed gemini report.json.
+      # Self-starts the Vite dev server via webServer in playwright.config.ts.
+      - name: Run E2E tests
         run: pnpm test:e2e
 
       - name: Upload Playwright report on failure
@@ -107,12 +137,6 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 7
-
-      - name: Render seed=1 PNGs
-        run: pnpm data:render-png --seed 1
-
-      - name: Mock OCR pipeline smoke (limit 10)
-        run: pnpm measure:invoice-ocr --seed 1 --limit 10
 
 # Notes for evolving this:
 #
