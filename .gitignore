@@ -36,7 +36,6 @@ e2e/demo/output/*.mp4
 !e2e/demo/output/.gitkeep
 
 # Editor / OS
-.DS_Store
 Thumbs.db
 .idea/
 .vscode/*
