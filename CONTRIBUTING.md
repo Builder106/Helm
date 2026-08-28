@@ -4,7 +4,7 @@ Helm is a personal portfolio project, so the "contributor" is usually me-from-ne
 
 ## Dev environment
 
-- **Node 22+** (use `nvm use`to pin via`.nvmrc`).
+- **Node 26** (use `nvm use`to pin via`.nvmrc`).
 - **pnpm** for package management. The repo uses pnpm workspaces; npm and yarn will not produce the right `node_modules` layout.
 - **Gemini API key** in `.env`as`GEMINI_API_KEY`. Free key at [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey). Default model is `gemini-3.1-flash-lite`(overridable via`GEMINI_MODEL`). Free tier on 2.5 Flash is ~10 RPM and ~250 RPD; the extractor self-paces at 6.5s between calls so a 200-invoice run takes ~22 minutes. Set `GEMINI_MODEL=gemini-3.1-flash-lite`and`GEMINI_MIN_INTERVAL_MS=4500`for the more generous Lite tier. (Optional secondary:`GROQ_API_KEY` if you want to compare against the Llama 4 Scout extractor.)
 - **libsql** runs locally as a single file at `data/helm.db`— no setup required, no account. The dev default in`.env.example`is`LIBSQL_URL=file:./data/helm.db`. For deployment, swap to a Turso Cloud URL (`libsql://<name>.turso.io`) + `LIBSQL_AUTH_TOKEN`; SQL is identical.

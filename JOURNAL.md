@@ -4,6 +4,10 @@
 > things happen — retrospectives need this raw material to land.
 > Reverse-chronological; one paragraph max per entry.
 
+## 2026-08-28: Node 26 runtime verification #decision
+
+Moved the project declaration from Node 22 to Node 26. The CI workflow already used Node 26. On Linux ARM64, the data typecheck, workspace build, 28 Vitest tests, fixture generation, 200 PNG renders, ten-invoice mock OCR run, and six Playwright tests passed. The root `pnpm typecheck` script still has a stale `mcp/*` workspace filter, so it remains a separate cleanup item.
+
 ## 2026-08-14: Accessible plain-English documentation update #decision
 
 Updated the README headline, summary tagline, and introductory section to explain the Gemini and MCP operations assistant in plain terms. Framed the value proposition around eliminating repetitive clerical paperwork and automated invoice reconciliation while keeping benchmark numbers and technical architecture diagrams intact.

@@ -119,7 +119,7 @@ Each panel of the dashboard maps to one sub-feature, and each sub-feature ships 
 ```text
 Helm/
 ├── front/        React 19 + Vite + Chart.js + Tailwind: the dashboard
-├── back/         Node 22 + Express 5: API surface, agent orchestration
+├── back/         Node 26 + Express 5: API surface, agent orchestration
 ├── mcp/          Four MCP servers: one per data source (erp, crm, ap, channel)
 │   ├── erp/
 │   ├── crm/
