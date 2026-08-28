@@ -1,7 +1,6 @@
 packages:
   - "front"
   - "back"
-  - "mcp/*"
 allowBuilds:
   '@google/genai': true
   '@parcel/watcher': true
