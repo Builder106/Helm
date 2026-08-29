@@ -16,6 +16,9 @@ updates:
       time: "07:00"
       timezone: America/New_York
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: "typescript"
+        versions: [">= 7.0.0"]
     groups:
       # Group related deps so a single PR carries a coherent diff.
       playwright:
@@ -40,11 +43,11 @@ updates:
     schedule:
       interval: weekly
       day: monday
+    groups:
+      actions:
+        patterns: ["*"]
     commit-message:
       prefix: "ci"
     labels:
       - dependencies
       - ci
-    ignore:
-      - dependency-name: "typescript"
-        versions: [">= 7.0.0"]
