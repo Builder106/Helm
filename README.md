@@ -6,9 +6,9 @@
   <img alt="Helm: Gemini 3.1 Flash Lite and MCP co-pilot for small business operations" src="assets/banner-dark.svg">
 </picture>
 
-[![CI](https://github.com/Builder106/helm/actions/workflows/deploy.yml/badge.svg)](https://github.com/Builder106/helm/actions/workflows/deploy.yml)
+[![CI](https://github.com/Builder106/helm/actions/workflows/ci.yml/badge.svg)](https://github.com/Builder106/helm/actions/workflows/ci.yml)
 [![Live demo](https://img.shields.io/badge/demo-live-success.svg)](https://helm-bridge.vercel.app)
-[![Node](https://img.shields.io/badge/Node-22%2B-339933.svg?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Node](https://img.shields.io/badge/Node-26-339933.svg?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-19-61DAFB.svg?logo=react&logoColor=white)](https://react.dev/)
 [![Gemini](https://img.shields.io/badge/Gemini%203.1%20Flash%20Lite-vision-4285F4.svg?logo=google&logoColor=white)](https://ai.google.dev/gemini-api/docs/models/gemini)
 [![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-0A0A0A.svg)](https://modelcontextprotocol.io/)
