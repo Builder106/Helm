@@ -101,7 +101,7 @@ async function main(): Promise<void> {
   console.log(`  exact match: ${headline.exact_match_count}/${headline.creators_processed} (${(headline.exact_match_rate * 100).toFixed(1)}%)`);
   console.log(`  field acc:   ${(headline.extraction.field_accuracy * 100).toFixed(1)}%`);
   console.log(`  reconciled:  $${headline.dollars_reconciled.toFixed(2)} ($${headline.max_payout_drift_usd.toFixed(2)} max drift)`);
-  console.log(`  cost:        $${headline.cost.total_usd.toFixed(4)} total · $${headline.cost.mean_per_creator_usd.toFixed(6)}/creator`);
+  console.log(`  cost:        $${headline.cost.total_usd.toFixed(4)} total | $${headline.cost.mean_per_creator_usd.toFixed(6)}/creator`);
   console.log(`  latency:     p50=${headline.latency.p50_ms}ms p95=${headline.latency.p95_ms}ms`);
   console.log(`  output → ${outDir}`);
 }

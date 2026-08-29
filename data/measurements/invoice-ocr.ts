@@ -162,7 +162,7 @@ async function main(): Promise<void> {
 
   console.log(`[helm:measure] done.`);
   console.log(`  extraction: parsed=${headline.extraction.parse_rate.toFixed(3)} field_acc=${headline.extraction.field_accuracy.toFixed(3)} line_acc=${headline.extraction.line_item_recall.toFixed(3)}`);
-  console.log(`  cost:       $${headline.cost.total_usd.toFixed(4)} total · $${headline.cost.mean_per_invoice_usd.toFixed(6)} per invoice`);
+  console.log(`  cost:       $${headline.cost.total_usd.toFixed(4)} total | $${headline.cost.mean_per_invoice_usd.toFixed(6)} per invoice`);
   console.log(`  latency:    p50=${headline.latency.p50_ms}ms p95=${headline.latency.p95_ms}ms`);
   console.log(`  reconciler: precision=${headline.reconciler.precision.toFixed(3)} recall=${headline.reconciler.recall.toFixed(3)} f1=${headline.reconciler.f1.toFixed(3)}`);
   console.log(`  output → ${outDir}`);

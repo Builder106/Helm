@@ -28,7 +28,7 @@ test.describe('Helm dashboard renders both shipped trials', () => {
 
   test('page loads with the Helm brand in the banner', async ({ page }) => {
     const banner = page.getByRole('banner');
-    await expect(banner.getByText('submersible · eval dive')).toBeVisible();
+    await expect(banner.getByText('submersible | eval dive')).toBeVisible();
     await expect(page).toHaveTitle(/Helm/);
   });
 
@@ -56,7 +56,7 @@ test.describe('Helm dashboard renders both shipped trials', () => {
     const sidebar = page.getByRole('navigation');
     await expect(sidebar.getByRole('button', { name: /invoice-ocr/i })).toBeVisible();
     await expect(sidebar.getByRole('button', { name: /payout-reconciler/i })).toBeVisible();
-    await expect(sidebar.getByText('measured · 2 pending descent')).toBeVisible();
+    await expect(sidebar.getByText('measured | 2 pending descent')).toBeVisible();
   });
 
   test('discrepancy log on trial 02 surfaces flagged creators', async ({ page }) => {
