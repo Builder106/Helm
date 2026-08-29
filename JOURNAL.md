@@ -4,6 +4,10 @@
 > things happen — retrospectives need this raw material to land.
 > Reverse-chronological; one paragraph max per entry.
 
+## 2026-08-29: Git deployment branches restricted #decision
+
+Git-triggered Vercel deployments now run only for `main` and `staging`. The project keeps `main` as its Production Branch, so `staging` is the only Preview branch. Replaced the old `ignoreCommand`, which created canceled deployment records for blocked branches, with `git.deploymentEnabled`.
+
 ## 2026-08-28: Node 26 runtime verification #decision
 
 Moved the project declaration from Node 22 to Node 26. The CI workflow already used Node 26. On Linux ARM64, the data typecheck, workspace build, 28 Vitest tests, fixture generation, 200 PNG renders, ten-invoice mock OCR run, and six Playwright tests passed. The root `pnpm typecheck` script still has a stale `mcp/*` workspace filter, so it remains a separate cleanup item.
