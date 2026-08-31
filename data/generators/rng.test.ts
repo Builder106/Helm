@@ -40,6 +40,27 @@ describe('createRng', () => {
     }
   });
 
+  test('float(min, max) stays inside [min, max)', () => {
+    const rng = createRng('float');
+    for (let i = 0; i < 1000; i++) {
+      const v = rng.float(1.5, 9.5);
+      expect(v).toBeGreaterThanOrEqual(1.5);
+      expect(v).toBeLessThan(9.5);
+    }
+  });
+
+  test('bool() defaults to 0.5 probability', () => {
+    const rng = createRng('bool-default');
+    let trues = 0;
+    const n = 5000;
+    for (let i = 0; i < n; i++) {
+      if (rng.bool()) trues++;
+    }
+    const observed = trues / n;
+    expect(observed).toBeGreaterThan(0.45);
+    expect(observed).toBeLessThan(0.55);
+  });
+
   test('pick from non-empty array returns one of the elements', () => {
     const rng = createRng('pick');
     const items = ['a', 'b', 'c', 'd'] as const;

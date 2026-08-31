@@ -80,8 +80,8 @@ jobs:
         run: pnpm build
 
       # Vitest: deterministic-RNG, payout-policy, OCR-reconciler suites.
-      - name: Unit tests
-        run: pnpm exec vitest run --reporter=default
+      - name: Unit tests with coverage
+        run: pnpm test:coverage
 
       # Quick end-to-end smoke against a deterministic seed=1 fixture.
       # Re-runs the synthetic-data generators to confirm they still

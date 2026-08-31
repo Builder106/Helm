@@ -8,8 +8,19 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
-      include: ['data/generators/**/*.ts', 'back/src/**/*.ts'],
-      exclude: ['**/*.test.ts', '**/types.ts'],
+      include: [
+        'back/src/ap/schema.ts',
+        'back/src/ap/reconcile.ts',
+        'back/src/payouts/schema.ts',
+        'data/generators/orders/policy.ts',
+        'data/generators/rng.ts',
+      ],
+      thresholds: {
+        lines: 100,
+        functions: 100,
+        branches: 100,
+        statements: 100,
+      },
     },
   },
 });

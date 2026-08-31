@@ -57,6 +57,18 @@ describe('reconcile', () => {
     expect(result.flags).toContain('math_mismatch_tax');
   });
 
+  test('flags tax mismatch when total drifts despite matching subtotal and tax amount', () => {
+    const i = invoice({
+      subtotal: 50,
+      tax_rate: 0.08,
+      tax_amount: 4,
+      total: 100, // expected total 54 — drift 46
+    });
+    const result = reconcile(i, { seenInvoiceNumbers: new Set() });
+    expect(result.status).toBe('flagged');
+    expect(result.flags).toContain('math_mismatch_tax');
+  });
+
   test('flags missing due date', () => {
     const i = invoice({ due_date: null });
     const result = reconcile(i, { seenInvoiceNumbers: new Set() });
