@@ -1,10 +1,3 @@
-# Dependabot keeps the toolchain fresh without manual PR babysitting.
-# Weekly schedule (not daily) — every Monday morning, batched into one
-# PR per ecosystem so the noise stays manageable on a solo project.
-#
-# Groq + libsql + Anthropic-adjacent libraries move fast; review the
-# changelogs before merging when the major version bumps.
-
 version: 2
 
 updates:
@@ -20,7 +13,6 @@ updates:
       - dependency-name: "typescript"
         versions: [">= 7.0.0"]
     groups:
-      # Group related deps so a single PR carries a coherent diff.
       playwright:
         patterns:
           - "@playwright/*"
@@ -33,6 +25,12 @@ updates:
       types:
         patterns:
           - "@types/*"
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
     commit-message:
       prefix: "deps"
     labels:
