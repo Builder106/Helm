@@ -8,3 +8,7 @@ allowBuilds:
   protobufjs: true
 minimumReleaseAgeExclude:
   - zod@4.5.1
+overrides:
+  "fast-uri@3": "^3.1.6"
+  "fast-uri@4": "^4.1.3"
+
